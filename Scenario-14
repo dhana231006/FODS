@@ -1,0 +1,5 @@
+import pandas as pd
+
+data = pd.DataFrame({'age': [25, 30, 25, 35, 40, 30, 35, 25]})
+age_freq = data['age'].value_counts().sort_index()
+print("Frequency distribution of ages:\n", age_freq)
