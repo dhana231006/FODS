@@ -1,0 +1,19 @@
+months = ['Jan', 'Feb', 'Mar', 'Apr']
+temperature = [15, 18, 22, 25]
+rainfall = [30, 20, 25, 10]
+
+# Line Plot for temperature
+plt.plot(months, temperature, marker='o', color='purple')
+plt.title("Monthly Temperature")
+plt.xlabel("Month")
+plt.ylabel("Temperature (°C)")
+plt.grid(True)
+plt.show()
+
+# Scatter Plot for rainfall
+plt.scatter(months, rainfall, color='blue')
+plt.title("Monthly Rainfall")
+plt.xlabel("Month")
+plt.ylabel("Rainfall (mm)")
+plt.grid(True)
+plt.show()
