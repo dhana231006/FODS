@@ -1,0 +1,14 @@
+from sklearn.cluster import KMeans
+import numpy as np
+
+# Features: [spend, frequency]
+X = np.array([[100, 10], [200, 20], [150, 15], [400, 40], [450, 45]])
+
+kmeans = KMeans(n_clusters=2, random_state=42)
+kmeans.fit(X)
+
+# New customer
+new_customer = np.array([[160, 18]])
+label = kmeans.predict(new_customer)
+
+print("Assigned to segment:", label[0])
