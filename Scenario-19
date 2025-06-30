@@ -1,0 +1,15 @@
+import numpy as np
+import scipy.stats as stats
+
+# Example data
+drug_group = np.random.normal(10, 2, 50)
+placebo_group = np.random.normal(5, 2, 50)
+
+def confidence_interval(data, confidence=0.95):
+    mean = np.mean(data)
+    sem = stats.sem(data)
+    margin = sem * stats.t.ppf((1 + confidence) / 2., len(data) - 1)
+    return mean - margin, mean + margin
+
+print("95% CI for drug group:", confidence_interval(drug_group))
+print("95% CI for placebo group:", confidence_interval(placebo_group))
