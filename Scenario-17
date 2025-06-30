@@ -1,0 +1,65 @@
+import pandas as pd
+from collections import Counter
+import matplotlib.pyplot as plt
+import re
+from nltk.corpus import stopwords
+import nltk
+
+# Download stopwords (only needed first time)
+nltk.download('stopwords')
+
+# Sample data embedded in the code
+data = {
+    'feedback': [
+        "The product is great and works perfectly! Very satisfied with my purchase.",
+        "Delivery was late but the product quality is good. Would recommend.",
+        "Not happy with the customer service. The product itself is okay.",
+        "Excellent value for money. Fast shipping and good packaging.",
+        "The item arrived damaged. Poor quality control. Disappointed.",
+        "Amazing product! Works better than expected. Five stars!",
+        "Average product, nothing special. Expected better for the price.",
+        "Customer support was very helpful in resolving my issue. Thank you!",
+        "Product stopped working after 2 days. Very unreliable.",
+        "Perfect fit and exactly as described. Very happy with this purchase."
+    ]
+}
+
+# Create DataFrame from sample data
+df = pd.DataFrame(data)
+
+# Text preprocessing
+feedback = df['feedback'].astype(str).str.lower().apply(lambda x: re.sub(r'[^\w\s]', '', x))
+
+# Remove stopwords
+stop_words = set(stopwords.words('english'))
+words = " ".join(feedback).split()
+filtered_words = [w for w in words if w not in stop_words and len(w) > 2]  # Also filter out short words
+
+# Calculate word frequencies
+word_freq = Counter(filtered_words)
+
+# Get user input for top N words
+N = int(input("Enter number of top frequent words to display (1-20): "))
+N = max(1, min(20, N))  # Ensure N is between 1-20
+top_words = word_freq.most_common(N)
+
+# Display results
+print("\nTop Words:")
+for word, freq in top_words:
+    print(f"{word}: {freq}")
+
+# Plot
+plt.figure(figsize=(10, 5))
+labels, values = zip(*top_words)
+bars = plt.bar(labels, values, color='teal')
+
+# Add value labels on top of bars
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2., height,
+             f'{height}', ha='center', va='bottom')
+
+plt.xticks(rotation=45, ha='right')
+plt.title(f"Top {N} Frequent Words in Customer Feedback")
+plt.tight_layout()
+plt.show()
