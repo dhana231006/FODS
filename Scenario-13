@@ -1,0 +1,22 @@
+from collections import Counter
+import re
+
+# Sample inbuilt text (simulate 'sample_text.txt')
+text = """
+Data science is an interdisciplinary field that uses scientific methods,
+processes, algorithms and systems to extract knowledge and insights from noisy,
+structured and unstructured data, and apply knowledge from data across a broad range
+of application domains.
+"""
+
+# Preprocess: lowercase, remove punctuation, split into words
+clean_text = re.sub(r'[^\w\s]', '', text.lower())
+words = clean_text.split()
+
+# Count word frequencies
+word_freq = Counter(words)
+
+# Display result
+print("Word Frequency Distribution:")
+for word, freq in word_freq.items():
+    print(f"{word}: {freq}")
