@@ -1,0 +1,17 @@
+from sklearn.cluster import KMeans
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame({
+    'total_spent': [100, 200, 150, 800, 850, 900],
+    'visit_frequency': [1, 2, 1, 10, 9, 11]
+})
+
+kmeans = KMeans(n_clusters=2)
+df['cluster'] = kmeans.fit_predict(df)
+
+plt.scatter(df['total_spent'], df['visit_frequency'], c=df['cluster'], cmap='plasma')
+plt.xlabel("Total Spent")
+plt.ylabel("Visit Frequency")
+plt.title("Customer Clusters")
+plt.show()
