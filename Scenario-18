@@ -1,0 +1,31 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+
+# Example data
+data = pd.DataFrame({
+    'age': [22, 25, 30, 35, 40, 45, 50, 28, 33, 38, 42, 27, 29, 31, 36, 39, 44, 48],
+    'fat': [15, 18, 20, 25, 28, 30, 35, 22, 26, 29, 31, 19, 21, 23, 27, 30, 32, 34]
+})
+
+print("Mean:\n", data.mean())
+print("Median:\n", data.median())
+print("Std Dev:\n", data.std())
+
+# Boxplot
+data.boxplot(column=['age', 'fat'])
+plt.title("Boxplot for Age and Fat %")
+plt.show()
+
+# Scatter Plot
+plt.scatter(data['age'], data['fat'])
+plt.xlabel("Age")
+plt.ylabel("Fat %")
+plt.title("Scatter: Age vs Fat %")
+plt.show()
+
+# Q-Q Plot
+stats.probplot(data['fat'], dist="norm", plot=plt)
+plt.title("Q-Q Plot for Fat %")
+plt.show()
