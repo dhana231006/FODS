@@ -1,0 +1,16 @@
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+
+# Load data
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# Train model
+clf = DecisionTreeClassifier()
+clf.fit(X, y)
+
+# New input
+sample = [[5.1, 3.5, 1.4, 0.2]]
+prediction = clf.predict(sample)
+
+print("Predicted Species:", iris.target_names[prediction[0]])
