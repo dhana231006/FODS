@@ -1,0 +1,49 @@
+import pandas as pd
+from scipy import stats
+import numpy as np
+
+# Create an inbuilt dataset of customer reviews (ratings 1-5)
+np.random.seed(42)
+ratings_dist = {
+    'Excellent': 5,
+    'Good': 4,
+    'Average': 3,
+    'Poor': 2,
+    'Terrible': 1
+}
+
+# Generate skewed distribution (more positive reviews)
+ratings = np.random.choice(
+    list(ratings_dist.values()),
+    size=500,
+    p=[0.40, 0.30, 0.15, 0.10, 0.05]  # Higher probability for good ratings
+)
+
+data = pd.DataFrame({
+    'review_id': range(1, 501),
+    'rating': ratings,
+    'sentiment': [list(ratings_dist.keys())[r-1] for r in ratings]
+})
+
+# Calculate statistics
+mean = np.mean(data['rating'])
+std = np.std(data['rating'], ddof=1)
+n = len(data['rating'])
+
+# Compute confidence interval
+confidence = 0.95
+t_critical = stats.t.ppf((1 + confidence) / 2, df=n-1)
+margin_error = t_critical * (std / np.sqrt(n))
+ci = (mean - margin_error, mean + margin_error)
+
+# Print results
+print("Customer Reviews Analysis")
+print("="*40)
+print(f"Sample size: {n}")
+print(f"Mean rating: {mean:.2f} ± {margin_error:.2f}")
+print(f"Standard deviation: {std:.2f}")
+print(f"{confidence*100:.0f}% Confidence Interval: ({ci[0]:.3f}, {ci[1]:.3f})")
+
+# Additional insights
+print("\nRating Distribution:")
+print(data['sentiment'].value_counts().sort_index())
