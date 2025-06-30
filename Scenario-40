@@ -1,0 +1,19 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Example CSV should have: name, age, goals, salary, position
+df = pd.read_csv("soccer_players.csv")
+
+top_goals = df.nlargest(5, 'goals')[['name', 'goals']]
+top_salaries = df.nlargest(5, 'salary')[['name', 'salary']]
+avg_age = df['age'].mean()
+above_avg_age = df[df['age'] > avg_age]['name']
+
+print("Top 5 Goal Scorers:\n", top_goals)
+print("Top 5 Salaries:\n", top_salaries)
+print("Players above average age:\n", above_avg_age)
+
+df['position'].value_counts().plot(kind='bar', title="Player Distribution by Position")
+plt.xlabel("Position")
+plt.ylabel("Count")
+plt.show()
