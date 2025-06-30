@@ -1,0 +1,15 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = pd.DataFrame({
+    'study_time': [1, 2, 3, 4, 5],
+    'exam_score': [50, 60, 70, 80, 90]
+})
+
+correlation = data.corr()
+print("Correlation:\n", correlation)
+
+sns.scatterplot(x='study_time', y='exam_score', data=data)
+plt.title("Study Time vs Exam Score")
+plt.show()
