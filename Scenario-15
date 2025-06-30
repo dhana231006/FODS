@@ -1,0 +1,4 @@
+likes = [5, 10, 5, 20, 10, 15, 5]
+likes_series = pd.Series(likes)
+like_freq = likes_series.value_counts().sort_index()
+print("Frequency distribution of likes:\n", like_freq)
