@@ -1,0 +1,6 @@
+reviews = ["Great product", "Bad quality", "Great quality", "Not great", "Very bad"]
+from collections import Counter
+
+all_words = " ".join(reviews).lower().split()
+word_freq = Counter(all_words)
+print("Frequency distribution of review words:\n", word_freq)
