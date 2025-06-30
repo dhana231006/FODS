@@ -1,0 +1,22 @@
+import pandas as pd
+from scipy.stats import ttest_ind
+import matplotlib.pyplot as plt
+
+# Simulated data
+treatment = [120, 115, 122, 118, 116]
+placebo = [130, 132, 128, 135, 131]
+
+# Hypothesis Test
+t_stat, p_value = ttest_ind(treatment, placebo)
+
+print("P-value:", p_value)
+if p_value < 0.05:
+    print("Significant difference. Treatment effective.")
+else:
+    print("No significant difference.")
+
+# Visualization
+plt.boxplot([treatment, placebo], labels=['Treatment', 'Placebo'])
+plt.title("Blood Pressure Comparison")
+plt.ylabel("BP Level")
+plt.show()
