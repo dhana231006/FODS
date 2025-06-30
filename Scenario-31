@@ -1,0 +1,19 @@
+from sklearn.cluster import KMeans
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample customer data
+data = pd.DataFrame({
+    'purchase_frequency': [1, 2, 3, 8, 9, 10],
+    'spend_amount': [100, 200, 150, 800, 850, 900]
+})
+
+kmeans = KMeans(n_clusters=2)
+data['cluster'] = kmeans.fit_predict(data)
+
+# Visualize clusters
+plt.scatter(data['purchase_frequency'], data['spend_amount'], c=data['cluster'], cmap='viridis')
+plt.xlabel("Purchase Frequency")
+plt.ylabel("Spend Amount")
+plt.title("Customer Segments")
+plt.show()
