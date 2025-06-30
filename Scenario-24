@@ -1,0 +1,16 @@
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4], [7, 8], [8, 9]])
+y = np.array([0, 0, 0, 1, 1])  # 0 = No condition, 1 = Condition
+
+# New patient data
+new_patient = np.array([[4, 5]])
+k = 3
+
+model = KNeighborsClassifier(n_neighbors=k)
+model.fit(X, y)
+prediction = model.predict(new_patient)
+
+print("Prediction for new patient:", "Has condition" if prediction[0] == 1 else "No condition")
