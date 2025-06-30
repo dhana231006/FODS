@@ -1,0 +1,19 @@
+from sklearn.linear_model import LinearRegression
+import pandas as pd
+
+# Sample dataset
+df = pd.DataFrame({
+    'engine_size': [1.0, 1.2, 1.5, 2.0],
+    'horsepower': [70, 90, 110, 130],
+    'fuel_efficiency': [20, 18, 15, 12],
+    'price': [500000, 600000, 700000, 900000]
+})
+
+X = df[['engine_size', 'horsepower', 'fuel_efficiency']]
+y = df['price']
+
+model = LinearRegression()
+model.fit(X, y)
+
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
