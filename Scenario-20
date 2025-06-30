@@ -1,0 +1,16 @@
+from scipy import stats
+import numpy as np
+
+# Sample conversion rates
+design_A = np.array([0.10, 0.12, 0.11, 0.13, 0.09])
+design_B = np.array([0.15, 0.16, 0.14, 0.17, 0.18])
+
+# Perform two-sample t-test
+t_stat, p_value = stats.ttest_ind(design_A, design_B)
+
+print("T-statistic:", t_stat)
+print("P-value:", p_value)
+if p_value < 0.05:
+    print("Statistically significant difference found.")
+else:
+    print("No statistically significant difference.")
